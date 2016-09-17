@@ -1,0 +1,15 @@
+<div class="logo">BibleMine</div>
+<input class="search-field" type="text" ng-model="searchTerm" ng-change="getVerse()" placeholder="Search">
+<div class="button fa fa-th fa-lg"></div>
+<div class="button fa fa-gear fa-lg"></div>
+<section class="search-results">
+	<div ng-repeat="searchResult in searchResults" ng-switch="searchResult.type" class="search-result">
+		<div ng-switch-when="reference">
+			<a href="#{{ searchResult.url }}">
+				<div class="title">{{ searchResult.name }}</div>
+				<div>{{ searchResult.content }}</div>
+			</a>
+		</div>
+	</div>
+</section>
+

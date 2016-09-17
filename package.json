@@ -1,0 +1,21 @@
+{
+	"name": "BibleMine",
+	"version": "0.0.1",
+	"main": "index.html",
+	"author": "KereszTech",
+	"window": {
+		"title": "node-webkit demo",
+		"toolbar": true,
+		"frame": true,
+		"width": 1100,
+		"height": 800
+	},
+	"icon": "link.png",
+	"dependencies": {
+		"angular": "1.5.x",
+		"angular-route": "1.5.x",
+		"lodash": "4.13.x",
+		"font-awesome": "4.x.x",
+		"bootstrap": "3.x.x"
+	}
+}

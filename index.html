@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="BibleMine">
+	<head>
+		<meta charset="utf-8">
+		<title>BibleMine</title>
+		<script src="node_modules/angular/angular.js"></script>
+		<script src="node_modules/angular-route/angular-route.js"></script>
+		<script src="node_modules/lodash/lodash.js"></script>
+		<link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/main-header.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/menu.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/bible.css">
+	</head>
+	<body ng-controller="AppController">
+		<header class="main-header" bp-main-header ng-controller="MainHeaderController"></header>
+		<div class="main-body">
+			<nav class="main-menu" bp-menu></nav>
+			<section class="main-content">
+				<div ng-view></div>
+			</section>
+		</div>
+
+		<script src="app/module-bootstrap.js"></script>
+		<script src="app/routes.js"></script>
+		<script src="app/app-controller.js"></script>
+
+		<script src="app/shared/utility/filesystem-factory.js"></script>
+		<script src="app/shared/settings/settings-factory.js"></script>
+		<script src="app/shared/bible/biblesearcher-factory.js"></script>
+		<script src="app/shared/bible/biblelibrary-factory.js"></script>
+
+		<script src="app/components/main-header/main-header-controller.js"></script>
+		<script src="app/components/main-header/main-header-directive.js"></script>
+		<script src="app/components/menu/menu-directive.js"></script>
+		<script src="app/components/dashboard/dashboard-controller.js"></script>
+		<script src="app/components/bible/bible-controller.js"></script>
+	</body>
+</html>

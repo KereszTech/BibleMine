@@ -1,0 +1,18 @@
+.chapter {
+	padding: 15px 35px 35px 35px;
+	text-align: justify;
+}
+
+.chapter > h2 {
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+.chapter > p {
+	font-size: 20px;
+}
+
+.chapter > p > .verse-number {
+	padding: 0 5px 0 7px;
+	font-weight: bold;
+}
