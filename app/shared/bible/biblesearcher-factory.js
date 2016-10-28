@@ -6,10 +6,40 @@ Bible.factory('BibleSearcher', ['BibleLibrary', 'Settings', function (BibleLibra
 	var bookTitles = [];
 	bibleBookTitles.forEach(function (bookTitle, i) {
 		bookTitles[i] = bibleBookTitles[i].slice();
-		if (settingBookTitles[i]) {
+		if (settingBookTitles && settingBookTitles[i]) {
 			bookTitles[i].unshift(settingBookTitles[i]);
 		}
 	});
+
+
+	function search(searchTerm) {
+		var results = searchReferences(searchTerm);
+		//results.fullTextSearch = BibleLibrary.search('hu_karoli', searchTerm);
+		return results;
+	}
+
+	function searchReferences(searchTerm) {
+		var references = guessReference(searchTerm);
+		var results = [];
+
+		references.forEach(function (reference) {
+			var url = 'bible/hu_karoli/' + (reference.book + 1) + '/' + (reference.chapter + 1) + '/' + (reference.verse + 1);
+			url += (reference.verseRange) ? '/' + (reference.verseRange + 1) : '';
+			var name = bookTitles[reference.book][0] + ' ' + (reference.chapter + 1) + ',' + (reference.verse + 1);
+			name += (reference.verseRange) ? '-' + (reference.verseRange + 1) : '';
+			var content = BibleLibrary.getContent(reference);
+
+			results.push({
+				type: 'reference',
+				reference: reference,
+				url: url,
+				name: name,
+				content: (_.isArray(content)) ? content.join(' ') : content
+			});
+		});
+
+		return results;
+	}
 
 	function createPartsFromText(text) {
 		if (!text) {
@@ -117,9 +147,9 @@ Bible.factory('BibleSearcher', ['BibleLibrary', 'Settings', function (BibleLibra
 
 			// Find the most identical version of a given book's titles.
 			var currentSameBeginingLength = 0;
-			bookTitles[bookIndex].forEach(function (bookTitleAlts) {
+			bookTitles[bookIndex].forEach(function (bookTitleAlt) {
 				currentSameBeginingLength = Math.max(
-					sameBeginingLegth(cleanedSearchTerm, clean(bookTitleAlts)),
+					sameBeginingLegth(cleanedSearchTerm, clean(bookTitleAlt)),
 					currentSameBeginingLength
 				);
 			});
@@ -164,15 +194,20 @@ Bible.factory('BibleSearcher', ['BibleLibrary', 'Settings', function (BibleLibra
 			var i = 1;
 			var shouldSearch = true;
 			if (parts[1] === undefined) {
-				results.push({
+				results.unshift({
 					book: PSALMS_INDEX,
 					chapter: parts[0] - 1,
 					verse: 0
 				});
 			} else {
 				if (!_.isInteger(parts[1])) {
-					// @TODO don't seach only the first title !!!
-					if (bibleBookTitles[PSALMS_INDEX][0].indexOf(parts[1]) > -1 || (settingBookTitles[PSALMS_INDEX] && settingBookTitles[PSALMS_INDEX].indexOf(parts[1]) > -1)) {
+					var found = false;
+					bookTitles[PSALMS_INDEX].forEach(function (bookTitleAlt) {
+						if (bookTitleAlt.indexOf(parts[1]) > -1) {
+							found = true;
+						}
+					});
+					if (found) {
 						i = 2;
 					} else {
 						shouldSearch = false;
@@ -198,34 +233,6 @@ Bible.factory('BibleSearcher', ['BibleLibrary', 'Settings', function (BibleLibra
 		return results;
 	}
 
-	function searchReferences(searchTerm) {
-		var references = guessReference(searchTerm);
-		var results = [];
-
-		references.forEach(function (reference) {
-			var url = 'bible/hu_karoli/' + (reference.book + 1) + '/' + (reference.chapter + 1) + '/' + (reference.verse + 1);
-			url += (reference.verseRange) ? '/' + (reference.verseRange + 1) : '';
-			var name = bookTitles[reference.book][0] + ' ' + (reference.chapter + 1) + ',' + (reference.verse + 1);
-			name += (reference.verseRange) ? '-' + (reference.verseRange + 1) : '';
-			var content = BibleLibrary.getContent(reference);
-
-			results.push({
-				type: 'reference',
-				reference: reference,
-				url: url,
-				name: name,
-				content: (_.isArray(content)) ? content.join(' ') : content
-			});
-		});
-
-		return results;
-	}
-
-	function search(searchTerm) {
-		var results = searchReferences(searchTerm);
-		//results.fullTextSearch = BibleLibrary.search('hu_karoli', searchTerm);
-		return results;
-	}
 
 	return {
 		search: search
