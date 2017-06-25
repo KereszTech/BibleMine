@@ -11,7 +11,7 @@ module.exports = {
 	// Where to transpile the final JS file.
 	output: {
 		path: path.join(__dirname, 'build'),
-		filename: 'boundle.js',
+		filename: 'bundle.js',
 	},
 	watchOptions: {
 		aggregateTimeout: 300,
@@ -26,6 +26,10 @@ module.exports = {
 			'node_modules',
 			path.join(__dirname, 'app'),
 		],
+		alias: {
+			scenes: path.join(__dirname, 'app/scenes'),
+			components: path.join(__dirname, 'app/components'),
+		},
 	},
 	//devServer: {publicPath: "http://localhost:8080/build/"},
 	module: {
@@ -60,3 +64,4 @@ module.exports = {
 	],
 	// A SourceMap is added as DataUrl to the JavaScript file.
 	devtool: 'inline-source-map',
+};

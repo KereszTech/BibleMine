@@ -1,4 +1,4 @@
-.main-header {
+.mainHeader {
 	flex-basis: 40px;
 	display: -webkit-box;
 	display: -moz-box;
@@ -10,14 +10,14 @@
 	color: white;
 }
 
-.main-header > .logo {
+.mainHeader > .logo {
 	flex-basis: 100px;
 
 	padding-top: 10px;
 	text-align: center;
 }
 
-.main-header > .search-field {
+.mainHeader > .searchField {
 	flex-grow: 1;
 	height: 32px;
 
@@ -30,7 +30,7 @@
 	font-size: 20px;
 }
 
-.main-header > .button {
+.mainHeader > .button {
 	flex-basis: 50px;
 	height: 40px;
 
@@ -39,14 +39,14 @@
 	align-items: center;
 }
 
-.main-header > div:hover {
+.mainHeader > div:hover {
 	background-color: #35363A;
 	cursor: pointer;
 }
 
 
 
-.search-results {
+.searchResults {
 	position: fixed;
 	visibility: hidden;
 	top: 40px;
@@ -55,20 +55,20 @@
 	transition: visibility 0.2s;
 }
 
-.search-result {
+.searchResult {
 	background-color: #ddd;
 	border: #ccc 1px solid;
 	padding: 3px;
 }
 
-.search-result:hover {
+.searchResult:hover {
 	background-color: #ccc;
 }
 
-.search-result .title {
+.searchResult .title {
 	font-weight: bold;
 }
 
-.search-field:focus ~ .search-results {
+.searchField:focus ~ .searchResults {
 	visibility: visible;
 }

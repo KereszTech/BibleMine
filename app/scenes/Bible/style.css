@@ -1,3 +1,22 @@
+.mainBody {
+	/*background: #35363A;
+	color: white;*/
+	flex: 1;
+	
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.mainContent {
+	flex: 1;
+
+	overflow: auto;
+}
+
+
 .chapter {
 	padding: 15px 35px 35px 35px;
 	text-align: justify;
